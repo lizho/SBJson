@@ -3,12 +3,10 @@ SBJson is a simple and ~~navie~~ brief json parser.
 
 # Getting Start
 
-I have a SB,
-```CSharp
-using Lizho.SimpleBriefJson;
-```
+It's the very best way without words, just being like a old Chinese saying gose:
 
-I have a json,
+__Men Sheng Fa Da Cai!__
+
 ```json
 {
    "foo" : "bar",
@@ -24,7 +22,8 @@ I have a json,
 }
 ```
 
-Ah~~~, SBJson!
+However, you do asked me how to use this $hit, I'm afried that you would become unhappy if I keep slience. Being the developer, I have to submit you some ~~__Ren Sheng Jing Yan__~~ samples.
+
 ```CSharp
 using Lizho.SimpleBriefJson;
 using System;
@@ -75,3 +74,5 @@ namespace TestApp
     }
 }
 ```
+
+I'm ~~angry~~ EXCITED!
