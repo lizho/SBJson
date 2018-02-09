@@ -3,7 +3,7 @@ SBJson is a simple and ~~naive~~ brief json parser.
 
 # Getting Start
 
-It's the very best way without printing words, just being like a old Chinese saying gose:
+It's the very best way without printing words, just being like a old Chinese saying goes:
 
 __Men Sheng Fa Da Cai!__
 
