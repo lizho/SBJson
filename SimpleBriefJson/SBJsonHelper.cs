@@ -70,7 +70,10 @@ namespace Lizho.SimpleBriefJson
                         Root = new SBJsonNull();
                     }
                     else
+                    {
                         Status = SBJsonHelperStatus.Error;
+                        return;
+                    }
                     Root.JsonText = JsonText;
                     return;
             }
