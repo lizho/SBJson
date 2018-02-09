@@ -1,5 +1,5 @@
 # SBJson
-SBJson is a simple and ~~navie~~ brief json parser.
+SBJson is a simple and ~~naive~~ brief json parser.
 
 # Getting Start
 
