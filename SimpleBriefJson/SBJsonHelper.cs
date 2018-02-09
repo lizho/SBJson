@@ -29,7 +29,7 @@ namespace Lizho.SimpleBriefJson
 
         public string JsonText { get; protected set; }
 
-        public SBJsonBase Root;
+        public SBJsonBase Root { get; protected set; }
 
         protected enum SBJsonParseStatus
         {
