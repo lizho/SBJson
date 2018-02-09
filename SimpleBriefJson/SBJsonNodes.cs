@@ -12,8 +12,6 @@ namespace Lizho.SimpleBriefJson
         ArrayNode,
         DictNode,
         NullNode,
-        Base,
-        SBJsonNodeTypeCount,
     }
 
     public class SBJsonTypeException : Exception
@@ -24,6 +22,7 @@ namespace Lizho.SimpleBriefJson
     public abstract class SBJsonBase
     {
         public string JsonText { get; set; }
+
         public SBJsonBase this[int index] =>
             Type == SBJsonNodeType.ArrayNode ?
                 (this as SBJsonArray).Value[index] :

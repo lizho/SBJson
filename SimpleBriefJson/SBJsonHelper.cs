@@ -79,8 +79,7 @@ namespace Lizho.SimpleBriefJson
             Root.JsonText = JsonText;
 
             #region parse key-value pair
-            var _key = "";              // json value
-            var _value = "";            // json key
+            var _key = "";
             var _temp = new StringBuilder();
             var _status = SBJsonParseStatus.Null;
             var _escChar = false;       // whether last JsonChar is an escape character
@@ -119,32 +118,27 @@ namespace Lizho.SimpleBriefJson
                             goto case '{';
 
                         case '{':
-                            _brackets++;
-                            if (_brackets == 1)
+                            if (++_brackets == 1)
                                 continue;
                             break;
 
                         case '}':
-                            _brackets--;
-                            if (_brackets == 0)     // end of a json block
+                            if (--_brackets == 0)     // end of a json block
                             {
-                                _value = _temp.ToString();
-                                var _json = new SBJsonHelper(_value).Root;
-                                Root.CastTo<SBJsonDict>().Add(_key, _json);
+                                var _json = new SBJsonHelper(_temp.ToString()).Root;
                                 _temp.Clear();
+                                Root.CastTo<SBJsonDict>().Add(_key, _json);
                                 _status = SBJsonParseStatus.Null;
                                 continue;
                             }
                             break;
 
                         case ']':
-                            _brackets--;
-                            if (_brackets == 0)     // end of a json array
+                            if (--_brackets == 0)     // end of a json array
                             {
-                                _value = _temp.ToString();
-                                var _json = new SBJsonHelper(_value).Root;
-                                Root.CastTo<SBJsonArray>().Add(_json);
+                                var _json = new SBJsonHelper(_temp.ToString()).Root;
                                 _temp.Clear();
+                                Root.CastTo<SBJsonArray>().Add(_json);
                                 _status = SBJsonParseStatus.Null;
                                 continue;
                             }
@@ -153,8 +147,8 @@ namespace Lizho.SimpleBriefJson
                         case ',':
                             if (_brackets == 1)     // end of a json value
                             {
-                                _value = _temp.ToString();
-                                var _json = new SBJsonHelper(_value).Root;
+                                var _json = new SBJsonHelper(_temp.ToString()).Root;
+                                _temp.Clear();
                                 if (Root.Type == SBJsonNodeType.ArrayNode)
                                 {
                                     Root.CastTo<SBJsonArray>().Add(_json);
@@ -164,7 +158,6 @@ namespace Lizho.SimpleBriefJson
                                     Root.CastTo<SBJsonDict>().Add(_key, _json);
                                     _status = SBJsonParseStatus.Null;
                                 }
-                                _temp.Clear();
                                 continue;
                             }
                             break;
