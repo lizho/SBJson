@@ -76,3 +76,22 @@ namespace TestApp
 ```
 
 I'm ~~angry~~ EXCITED!
+
+```
+SBJson.JsonText   => {"foo" : "bar"    ,  "headers" : {"data" : [233,{"readme" : "bingo" },false   ]  }   }
+SBJson.ToString() => {"foo": "bar", "headers": {"data": [233, {"readme": "bingo"}, False]}}
+
+SBJson["foo"] => "bar"
+
+SBJson["headers"] => {"data": [233, {"readme": "bingo"}, False]}
+
+SBJson["headers"]["data"] => [233, {"readme": "bingo"}, False]
+
+SBJson["headers"]["data"][0] => 233
+
+SBJson["headers"]["data"][1] => {"readme": "bingo"}
+
+SBJson["headers"]["data"][1]["readme"] => "bingo"
+
+SBJson["headers"]["data"][2] => False
+```
