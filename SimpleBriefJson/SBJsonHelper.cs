@@ -11,7 +11,10 @@ namespace Lizho.SimpleBriefJson
     {
         public SBJsonHelper(string json)
         {
-            ParseJsonText(json);
+            if (string.IsNullOrWhiteSpace(json))
+                Status = SBJsonHelperStatus.Null;
+            else
+                ParseJsonText(json);
         }
 
         public void ParseJsonText(string json)
@@ -128,6 +131,7 @@ namespace Lizho.SimpleBriefJson
                         case '}':
                             if (--_brackets == 0)     // end of a json block
                             {
+                                if (string.IsNullOrWhiteSpace(_key)) continue;
                                 var _json = new SBJsonHelper(_temp.ToString()).Root;
                                 _temp.Clear();
                                 Root.CastTo<SBJsonDict>().Add(_key, _json);
@@ -139,9 +143,10 @@ namespace Lizho.SimpleBriefJson
                         case ']':
                             if (--_brackets == 0)     // end of a json array
                             {
-                                var _json = new SBJsonHelper(_temp.ToString()).Root;
+                                var _json = new SBJsonHelper(_temp.ToString());
+                                if (_json.Status == SBJsonHelperStatus.Null) continue;
                                 _temp.Clear();
-                                Root.CastTo<SBJsonArray>().Add(_json);
+                                Root.CastTo<SBJsonArray>().Add(_json.Root);
                                 _status = SBJsonParseStatus.Null;
                                 continue;
                             }
@@ -150,15 +155,17 @@ namespace Lizho.SimpleBriefJson
                         case ',':
                             if (_brackets == 1)     // end of a json value
                             {
-                                var _json = new SBJsonHelper(_temp.ToString()).Root;
+
+                                var _json = new SBJsonHelper(_temp.ToString());
+                                if (_json.Status == SBJsonHelperStatus.Null) continue;
                                 _temp.Clear();
                                 if (Root.Type == SBJsonNodeType.ArrayNode)
                                 {
-                                    Root.CastTo<SBJsonArray>().Add(_json);
+                                    Root.CastTo<SBJsonArray>().Add(_json.Root);
                                 }
                                 else
                                 {
-                                    Root.CastTo<SBJsonDict>().Add(_key, _json);
+                                    Root.CastTo<SBJsonDict>().Add(_key, _json.Root);
                                     _status = SBJsonParseStatus.Null;
                                 }
                                 continue;

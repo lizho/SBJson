@@ -39,6 +39,8 @@ namespace Lizho.SimpleBriefJson
         }
 
         abstract public SBJsonNodeType Type { get; }
+
+        public bool IsNull => Type == SBJsonNodeType.NullNode;
     }
 
     public class SBJsonNull : SBJsonBase
